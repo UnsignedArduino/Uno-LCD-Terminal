@@ -2,6 +2,10 @@
 #include <Wire.h>
 #include <Adafruit_RGBLCDShield.h>
 
+#define COLUMNS 16
+#define ROWS 2
+#define COLORFUL true
+
 Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
 #define OFF 0x0
@@ -12,9 +16,6 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 #define BLUE 0x4
 #define VIOLET 0x5
 #define WHITE 0x7 
-
-const byte COLUMNS = 16;
-const byte ROWS = 2;
 
 byte currCol = 0;
 byte currRow = 0;
@@ -80,16 +81,20 @@ void loop() {
       lcd.setCursor(currCol, currRow);
       break;
     }
-    case 's': {
+    case 'a': {
       waitForBytesAvailable(1);
       char subcmd = Serial.read();
       switch (subcmd) {
-        case 'c': {
+        case 'w': {
           Serial.println(COLUMNS);
           break;
         }
-        case 'r': {
+        case 'h': {
           Serial.println(ROWS);
+          break;
+        }
+        case 'c': {
+          Serial.println(COLORFUL ? 1 : 0);
           break;
         }
         default: {
@@ -106,6 +111,44 @@ void loop() {
           break;
         }
         lcd.print(chr);
+      }
+    }
+    case 'b': {
+      waitForBytesAvailable(1);
+      char color = Serial.read();
+      switch (color) {
+        case 'o': {
+          lcd.setBacklight(OFF);
+          break;
+        }
+        case 'r': {
+          lcd.setBacklight(RED);
+          break;
+        }
+        case 'y': {
+          lcd.setBacklight(YELLOW);
+          break;
+        }
+        case 'g': {
+          lcd.setBacklight(GREEN);
+          break;
+        }
+        case 't': {
+          lcd.setBacklight(TEAL);
+          break;
+        }
+        case 'b': {
+          lcd.setBacklight(BLUE);
+          break;
+        }
+        case 'v': {
+          lcd.setBacklight(VIOLET);
+          break;
+        }
+        case 'w': {
+          lcd.setBacklight(WHITE);
+          break;
+        }
       }
     }
     default: {
