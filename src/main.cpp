@@ -16,16 +16,98 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 const byte COLUMNS = 16;
 const byte ROWS = 2;
 
+byte currCol = 0;
+byte currRow = 0;
+
 void setup() {
   Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
   lcd.begin(COLUMNS, ROWS);
   lcd.setBacklight(WHITE);
+  lcd.clear();
+  lcd.home();
+}
+
+void waitForBytesAvailable(byte bytes) {
+  while (Serial.available() < bytes) {
+    ;
+  }
 }
 
 void loop() {
-  lcd.clear();
-  lcd.home();
-  lcd.print(millis());
-  delay(100);
+  waitForBytesAvailable(1);
+  char cmd = Serial.read();
+  switch (cmd) {
+    case 'r': {
+      lcd.clear();
+      currCol = 0;
+      currRow = 0;
+      break;
+    }
+    case 'd': {
+      lcd.clear();
+      break;
+    }
+    case 'h': {
+      currCol = 0;
+      currRow = 0;
+      break;
+    }
+    case 'c': {
+      waitForBytesAvailable(1);
+      char subcmd = Serial.read();
+      switch (subcmd) {
+        case 'c': {
+          long nextCol = Serial.parseInt();
+          if (nextCol != -1) {
+            currCol = nextCol;
+          }
+          break;
+        }
+        case 'r': {
+          long nextRow = Serial.parseInt();
+          if (nextRow != -1) {
+            currRow = nextRow;
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      break;
+    }
+    case 's': {
+      waitForBytesAvailable(1);
+      char subcmd = Serial.read();
+      switch (subcmd) {
+        case 'c': {
+          Serial.println(COLUMNS);
+          break;
+        }
+        case 'r': {
+          Serial.println(ROWS);
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      break;
+    }
+    case 'p': {
+      while (true) {
+        waitForBytesAvailable(1);
+        char chr = Serial.read();
+        if (chr == '\n' || chr == '\r') {
+          break;
+        }
+        lcd.print(chr);
+      }
+    }
+    default: {
+      break;
+    }
+  }
+  lcd.setCursor(currCol, currRow);
 }
