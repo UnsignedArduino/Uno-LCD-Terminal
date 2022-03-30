@@ -42,6 +42,7 @@ void loop() {
       lcd.clear();
       currCol = 0;
       currRow = 0;
+      lcd.setCursor(currCol, currRow);
       break;
     }
     case 'd': {
@@ -51,6 +52,7 @@ void loop() {
     case 'h': {
       currCol = 0;
       currRow = 0;
+      lcd.setCursor(currCol, currRow);
       break;
     }
     case 'c': {
@@ -75,6 +77,7 @@ void loop() {
           break;
         }
       }
+      lcd.setCursor(currCol, currRow);
       break;
     }
     case 's': {
@@ -109,5 +112,4 @@ void loop() {
       break;
     }
   }
-  lcd.setCursor(currCol, currRow);
 }
