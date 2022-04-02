@@ -3,6 +3,8 @@ An LCD terminal that is controllable over serial! Should theoretically work on a
 
 Designed to be used with my companion software [Uno LCD Terminal Daemon](https://github.com/UnsignedArduino/Uno-LCD-Terminal-Daemon). (some terribly written Python scripts)
 
+![The Uno LCD Terminal with the daemon running](https://user-images.githubusercontent.com/38868705/161362976-7f61f7ba-11e2-4924-9e02-678ab5eecd12.gif)
+
 ## Hardware
 
 ### Hardware needed
