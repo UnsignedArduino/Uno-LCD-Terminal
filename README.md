@@ -1,5 +1,31 @@
 # Uno-LCD-Terminal
-An LCD terminal that is controllable over serial!
+An LCD terminal that is controllable over serial! Should theoretically work on any Arduino board at least as powerful as an Arduino Uno, but only tested on such.
+
+Designed to be used with my companion software [Uno LCD Terminal Daemon](https://github.com/UnsignedArduino/Uno-LCD-Terminal-Daemon). (some terribly written Python scripts)
+
+![The Uno LCD Terminal with the daemon running](https://user-images.githubusercontent.com/38868705/161362976-7f61f7ba-11e2-4924-9e02-678ab5eecd12.gif)
+
+## Hardware
+
+### Hardware needed
+
+- Arduino Uno (or other Arduino board of similar form factor)
+- [Adafruit RGB LCD Shield Kit w/ 16x2 Character Display](https://www.adafruit.com/product/716)
+
+### Assembly
+
+Really couldn't get much easier, just plug the shield into the Arduino. 
+
+## Software
+
+### Uploading
+
+1. Clone this repo. 
+2. Open in your IDE for PlatformIO.
+3. Change the [`upload_port`](https://github.com/UnsignedArduino/Uno-LCD-Terminal/blob/main/platformio.ini#L15) in [`platformio.ini`](https://github.com/UnsignedArduino/Uno-LCD-Terminal/blob/main/platformio.ini) to match the Arduino Uno's serial port.
+5. Upload to your Arduino Uno. (Make sure it's plugged in!)
+
+## Serial protocol
 
 Designed to be used with the [Uno LCD Terminal Daemon](https://github.com/UnsignedArduino/Uno-LCD-Terminal-Daemon)!
  
