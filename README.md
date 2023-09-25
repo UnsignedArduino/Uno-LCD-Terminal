@@ -1,6 +1,8 @@
 # Uno-LCD-Terminal
 An LCD terminal that is controllable over serial!
 
+Designed to be used with the [Uno LCD Terminal Daemon](https://github.com/UnsignedArduino/Uno-LCD-Terminal-Daemon)!
+ 
 | Command | Sub command | Parameters        | Notes                                                           |
 |---------|-------------|-------------------|-----------------------------------------------------------------|
 | `r`     | None        | None              | Clears the display, resets the cursor position to (0, 0).       |
